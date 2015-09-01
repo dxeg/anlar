@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf8"/>
+    <meta content="width=device-width,user-scalable=no,initial-scale=1.0" name="viewport"/>
+    <meta name="-webkit-tap-highlight" content="no"/>
+    <meta content="IE=10" http-equiv="x-ua-compatible"/>
+    <title>mvc例子</title>
+    <![endif]-->
+    <script type="text/javascript" src="../../Qmik.all.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+<div>
+    <div class="box">
+        <p class="ftitle"> 全局控制(用户信息) </p>
+        <ul>
+            <li class=" q-hide">
+                <s class="lt">id(不是用户信息) </s>
+                <input name="user.id" type="text" value="id"/>
+                <s class="lt">动态绑定:</s>[<g class="bind">${user.id}</g>]
+            </li>
+            <li class=" q-hide">
+                <s class="lt">用户名: </s>
+                <input name="user.userName" type="text" value="leo"/>
+                <s class="lt">动态绑定:</s>[<g class="bind">${user.userName}</g>]
+            </li>
+            <li>
+                <s class="lt">email:</s><input name="user.email" type="text" value="qmik@qmik.org"/>
+                <s class="lt">动态绑定:</s>[<g class="bind">${user.email}</g>]
+            </li>
+            <li>
+                <s class="lt">密码: </s><input name="user.password" type="text"/>
+                <s class="lt">动态绑定:</s>[<g class="bind">{{user.password}}</g>]
+            </li>
+            <li>
+                <s class="lt">qq: </s><input name="user.qq" type="text"/>
+                <s class="lt">动态qq:</s>[<g class="bind">{{user.qq}}</g>]
+            </li>
+        </ul>
+    </div>
+    <div class="box" q-ctrl="shopping">
+        <p class="ftitle"> 控制器: [shopping]购物信息 ${gohome}
+            <a q-onclick="clickme" href="javascript:">&nbsp; <s>点我吧(事件)</s>
+                <g style="color:red;">${msg}</g>
+            </a>
+        </p>
+        <ul>
+            <li>
+                <x>
+                    <s class="lt">购买人:</s>[<g class="bind">${user.userName}</g>]&nbsp;
+                </x>
+                <x><s class="lt">过滤关键词: xo>*o</s>[<g class="bind">${vUserName}</g>]</x>
+            </li>
+            <li >
+                <s class="lt">物品名: </s><input name="shop.shopName" type="text" value="qmik"  q-onfocus="focusid"/>
+                <s class="lt">动态绑定:</s>[<g class="bind">${shop.shopName}</g>]
+            </li>
+            <li>
+                <s class="lt">价格: </s><input name="shop.price" type="text" value="999"/>
+                <s class="lt">动态绑定:</s>[<g class="bind">${shop.price}</g>]
+            </li>
+            <li>
+                <s class="lt">库存: </s><input name="shop.stock" type="text" value="11"/>
+                <s class="lt">动态绑定:</s>[<g class="bind">{{shop.stock}}</g>]
+            </li>
+            <li>
+                <s class="lt">备注: </s>
+                <textarea name="shop.remark">asdfasdf</textarea>
+                <s class="lt">动态绑定:</s>[<g class="bind">{{shop.remark}}</g>]
+            </li>
+            <li class=" q-hide">
+                <s class="lt">全局-用户-qq </s>
+                <s class="lt">动态绑定:</s>[<g class="bind">${user.qq}</g>]
+            </li>
+        </ul>
+    </div>
+
+    <div class="box" q-ctrl="lazy">
+        <p class="ftitle"> 控制器: [lazy] <g>${time} </g>
+          <s class="load" style="font-weight:700;" ng="a">
+            加载数据: <g>${time} </g>
+            <s class="loading" ng="b"></s>
+            <g>${user.userName}</g>
+          </s>
+        </p>
+        <ul>
+            <li>
+                <x>
+                    <s class="lt">购买人:</s>[<g class="bind">${user.userName}</g>]&nbsp;
+                </x>
+            </li>
+            <li>
+                <x>
+                    <s class="lt">商品名:</s>[<g class="bind">${goodsName}</g>]&nbsp;
+                </x>
+            </li>
+            <li>
+                <s class="lt">商品价格:</s>[<g class="bind">${price}</g>]&nbsp;
+            </li>
+            <li>
+                <s class="lt">商品介绍:</s>[<g class="bind">${desc}</g>]&nbsp;
+            </li>
+            <li>
+                <x>
+                    <s class="lt">商品品牌: </s><input name="brand" type="text" value="qmik"/>
+                    <s class="lt">动态绑定:</s>[<g class="bind">${brand}</g>&nbsp;]
+                </x>
+                <x>
+                    <s class="lt">商品品牌:</s>[<g class="bind">${brand}</g>]&nbsp;
+                </x>
+            </li>
+            <li>
+                <s class="lt">商品产地:</s>[<g class="bind">${addr}</g>]&nbsp;
+            </li>
+        </ul>
+    </div>
+    <div class="box" q-ctrl="search">
+        <p class="ftitle"> 控制器: [search]搜索</p>
+        <ul>
+            <li>
+                <x>
+                    <s class="lt">关键词: </s><input name="q" type="text" value="qmik"/>
+                    <s class="lt">动态绑定:</s>[<g class="bind">${q}</g>]
+                </x>
+                <x>
+                    <s class="lt">结果: </s>[<g class="bind">${vq}</g>]
+                </x>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    //$.app() 编译并生成应用,$.app().ctrl()定义控制器
+    $.app(function (scope) { //全局控制器的写法
+
+    }, {compile: false}).ctrl({
+        shopping: function (scope) {//购物
+
+            scope.vUserName = scope.parent.user.userName;//界面上用到的变量,没有输出相应的input标签,需要预定义
+            scope.msg = "";
+            window.scope = scope;
+            scope.gohome= "mng";
+            scope.clickme = function (e) {
+                scope.msg = "我变了 " + parseInt($.now() / 1000 + Math.random() * 100) + '';
+                scope.apply(["msg", "gohome"]); //这种写法,性能比较好,保更新 msg 对应的节点信息
+                //scope.apply();//这种写法性能比较差,会更新整个控制器的所有节点信息,
+            }
+            scope.parent.watch("user.userName", function (map) {
+                var v = map.value;
+                scope.vUserName = v.replace(/xo/g, "*o");
+                scope.apply("vUserName");
+            });
+            scope.watch({
+                "gohome": function (map) {
+                    console.log("watch gohome:", map);
+                },
+                "shop": function (map) {
+                    console.log("watch shop:", map);
+                }
+            });
+
+            scope.focusid = function(e){
+                console.log("focus id", this);
+            }
+        }, search: function (scope) {//搜索
+            scope.vq = "reqult=" + scope.q;
+            scope.watch("q", function (map) {
+                scope.vq = "reqult=" + map.value;
+                scope.apply(["vq"]);
+            });
+            scope.once("viewport", function(e){
+                console.log("search xxxx");
+            });
+        },
+        lazy: function (scope) {//控制器 lazyLoad, 延迟加载数据(用于通过ajax从远程加载数据,在显示到页面上,通过 scope.apply()方法来显示)
+            var ttl = 5000;
+            scope.vUserName = scope.parent.userName;//
+            scope.cssDisplay = "xxx";//初始化的值需要事先声明
+            scope.once("viewport", function(e){
+                console.log("lazy viewport ", e);
+            });
+            scope.time = parseInt(ttl / 1000);
+            var startTime = $.now() + ttl;
+            $.cycle(function () {
+                var t = startTime - $.now();
+                scope.time = parseInt(t / 1000);
+                scope.apply("time");
+            }, 900, ttl);
+
+            scope.once("viewport", function (e) {
+                console.log("vp");
+            });
+
+            $.delay(function () {
+                scope.$(".load").hide();
+                scope.cssDisplay = "none";
+                scope.goodsName = "衣服";
+                scope.brand = "七挫狼";
+                scope.addr = "福建福鼎";
+                scope.price = 98.8;
+                scope.desc = "源自纯天然xxx";
+                scope.apply([], function(){
+                    console.log("ox1")
+                });//更新页面显示数据
+                scope.apply([], function(){
+                    console.log("ox2")
+                });//更新页面显示数据
+            }, ttl);
+        }
+    });
+    $.delay(function(){
+        $.app();
+    }, 200);
+    console.log("...");
+</script>
+</body>

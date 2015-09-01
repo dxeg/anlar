@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf8"/>
+    <meta content="width=device-width,user-scalable=no,initial-scale=1.0" name="viewport"/>
+    <meta name="-webkit-tap-highlight" content="no"/>
+    <meta content="IE=10" http-equiv="x-ua-compatible"/>
+    <title>mvc例子</title>
+    <script type="text/javascript" src="../../Qmik.all.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div>
+    <div class="box border1" q-ctrl="shopping">
+        <p class="ftitle"> demo
+        </p>
+        <ul>
+            <li>
+                <s class="lt">名: </s><input name="shop.shopName" type="text" value="qmik"/>
+                <s class="lt">动态绑定:</s>[
+                <g class="bind">${shop.shopName}</g>
+                ]
+            </li>
+            <li>
+                <s class="lt">价: </s><input name="price" type="text" value="999"/>
+                <s class="lt">动态绑定:</s>[
+                <g class="bind">${price}</g>
+                ]
+            </li>
+        </ul>
+        <div class="box border1" border1>
+            <div>
+                <p>shopName: ${shop.shopName}</p>
+                <ul>
+                    <li>
+                        <s class="lt">数量: </s><input name="number" type="text" value="999"/>
+                        <s class="lt">动态绑定:</s>[
+                        <g class="bind">${number}</g>
+                        ]
+                    </li>
+                </ul>
+            </div>
+            <br/>
+
+            <div class="box border1">
+                <p>shopName:
+                    <g>${shop.shopName}</g>
+                </p>
+                <br/>
+
+                <div class="box border1">
+                    <p>shopName:
+                        <g>${shop.shopName}</g>
+                    </p>
+                    <p>数量:
+                        <g>${number}</g>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //$.app() 编译并生成应用,$.app().ctrl()定义控制器
+        $.app().ctrl({
+            shopping: function (scope) {//购物
+            }
+        });
+        // //
+    </script>
+</body>
